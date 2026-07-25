@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['nama_lengkap'] = $user['nama_lengkap'];
                     $_SESSION['role'] = $user['role'];
                     $_SESSION['email'] = $user['email'];
+                    $_SESSION['foto_profil'] = $user['foto_profil'] ?? null;
 
                     // Log activity
                     log_activity($user['id'], 'Login', 'Berhasil login ke dalam sistem.', $pdo);

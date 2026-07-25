@@ -53,6 +53,21 @@ body {
     transition: var(--transition-smooth);
 }
 
+.btn-navbar-user {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #fff;
+    transition: all 0.2s ease;
+}
+.btn-navbar-user:hover,
+.btn-navbar-user:focus,
+.btn-navbar-user.show {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
 .brand-title {
     font-weight: 800;
     letter-spacing: -0.5px;
@@ -301,6 +316,11 @@ body {
     background: linear-gradient(135deg, #059669 0%, #065f46 100%);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+}
+
+/* Hide default Bootstrap dropdown caret */
+.dropdown-toggle-no-caret::after {
+    display: none !important;
 }
 
 .btn-outline-light:hover {

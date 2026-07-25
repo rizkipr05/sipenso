@@ -28,7 +28,65 @@ if (!$user_data) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
-    if ($action === 'update_profile') {
+    if ($action === 'upload_avatar') {
+        if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+            $file = $_FILES['avatar'];
+            $allowed_types = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+            $max_size = 2 * 1024 * 1024; // 2MB
+
+            if (!in_array($file['type'], $allowed_types)) {
+                $error_msg = 'Format file tidak didukung. Harap unggah foto berformat JPG, PNG, atau WEBP.';
+            } elseif ($file['size'] > $max_size) {
+                $error_msg = 'Ukuran file terlalu besar. Maksimal ukuran foto adalah 2MB.';
+            } else {
+                $target_dir = __DIR__ . '/assets/uploads/avatars/';
+                if (!is_dir($target_dir)) {
+                    mkdir($target_dir, 0755, true);
+                }
+
+                $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
+                $new_filename = 'avatar_' . $user_id . '_' . time() . '.' . strtolower($ext);
+                $target_file = $target_dir . $new_filename;
+
+                if (move_uploaded_file($file['tmp_name'], $target_file)) {
+                    // Remove old avatar if exists
+                    if (!empty($user_data['foto_profil']) && file_exists($target_dir . $user_data['foto_profil'])) {
+                        @unlink($target_dir . $user_data['foto_profil']);
+                    }
+
+                    // Update DB & Session
+                    $stmt = $pdo->prepare("UPDATE users SET foto_profil = :foto WHERE id = :id");
+                    $stmt->execute(['foto' => $new_filename, 'id' => $user_id]);
+
+                    $_SESSION['foto_profil'] = $new_filename;
+                    log_activity($user_id, 'Update Foto Profil', 'Berhasil memperbarui foto profil akun.', $pdo);
+
+                    set_flash('success', 'Foto profil berhasil diperbarui!');
+                    header('Location: ' . base_url('profile.php?tab=info'));
+                    exit;
+                } else {
+                    $error_msg = 'Gagal mengunggah berkas foto profil ke server.';
+                }
+            }
+        } else {
+            $error_msg = 'Silakan pilih foto profil yang akan diunggah.';
+        }
+    } elseif ($action === 'delete_avatar') {
+        $target_dir = __DIR__ . '/assets/uploads/avatars/';
+        if (!empty($user_data['foto_profil']) && file_exists($target_dir . $user_data['foto_profil'])) {
+            @unlink($target_dir . $user_data['foto_profil']);
+        }
+
+        $stmt = $pdo->prepare("UPDATE users SET foto_profil = NULL WHERE id = :id");
+        $stmt->execute(['id' => $user_id]);
+
+        $_SESSION['foto_profil'] = null;
+        log_activity($user_id, 'Hapus Foto Profil', 'Berhasil menghapus foto profil akun.', $pdo);
+
+        set_flash('success', 'Foto profil telah dihapus.');
+        header('Location: ' . base_url('profile.php?tab=info'));
+        exit;
+    } elseif ($action === 'update_profile') {
         $nama_lengkap = sanitize($_POST['nama_lengkap'] ?? '');
         $nik = sanitize($_POST['nik'] ?? NULL);
         $email = sanitize($_POST['email'] ?? '');
@@ -154,6 +212,9 @@ if ($pdo) {
     $stmtCnt->execute(['uid' => $user_id]);
     $total_log_count = (int)$stmtCnt->fetchColumn();
 }
+
+$avatar_exists = (!empty($user_data['foto_profil']) && file_exists(__DIR__ . '/assets/uploads/avatars/' . $user_data['foto_profil']));
+$avatar_url = $avatar_exists ? base_url('assets/uploads/avatars/' . $user_data['foto_profil']) : null;
 ?>
 
 <div class="wrapper-admin">
@@ -177,13 +238,26 @@ if ($pdo) {
                         <i class="fa-solid fa-shield-halved fa-10x text-white"></i>
                     </div>
                     <div class="d-flex flex-column flex-md-row align-items-center align-items-md-end gap-4 position-relative z-1">
+                        
+                        <!-- Avatar Container with Trigger Button -->
                         <div class="position-relative">
-                            <div class="rounded-circle text-white d-flex align-items-center justify-content-center shadow-lg" 
-                                 style="width: 110px; height: 110px; font-size: 3rem; background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%); border: 4px solid rgba(255,255,255,0.25); box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
-                                <?= strtoupper(substr($user_data['nama_lengkap'], 0, 1)); ?>
-                            </div>
-                            <span class="position-absolute bottom-0 end-0 p-2 bg-success border border-2 border-white rounded-circle" title="Akun Terverifikasi & Aktif"></span>
+                            <?php if ($avatar_url): ?>
+                                <img src="<?= $avatar_url; ?>" alt="Foto Profil" class="rounded-circle shadow-lg" 
+                                     style="width: 110px; height: 110px; object-fit: cover; border: 4px solid rgba(255,255,255,0.3); box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                            <?php else: ?>
+                                <div class="rounded-circle text-white d-flex align-items-center justify-content-center shadow-lg" 
+                                     style="width: 110px; height: 110px; font-size: 3rem; background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%); border: 4px solid rgba(255,255,255,0.25); box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+                                    <?= strtoupper(substr($user_data['nama_lengkap'], 0, 1)); ?>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <!-- Camera Button Overlay -->
+                            <button type="button" class="btn btn-primary btn-sm rounded-circle position-absolute bottom-0 end-0 shadow-sm border border-2 border-white d-flex align-items-center justify-content-center" 
+                                    style="width: 36px; height: 36px;" data-bs-toggle="modal" data-bs-target="#modalUploadAvatar" title="Ubah Foto Profil">
+                                <i class="fa-solid fa-camera"></i>
+                            </button>
                         </div>
+
                         <div class="text-center text-md-start flex-grow-1">
                             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-start gap-2 mb-1">
                                 <h2 class="fw-bold mb-0 text-white"><?= sanitize($user_data['nama_lengkap']); ?></h2>
@@ -403,6 +477,54 @@ if ($pdo) {
                 </div>
             </div>
 
+        </div>
+    </div>
+</div>
+
+<!-- Modal Upload & Change Avatar Photo -->
+<div class="modal fade" id="modalUploadAvatar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="modal-header bg-primary text-white p-4">
+                <h5 class="modal-title fw-bold"><i class="fa-solid fa-camera me-2"></i> Perbarui Foto Profil</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="upload_avatar">
+                <div class="modal-body p-4 text-center">
+                    <div class="mb-4">
+                        <?php if ($avatar_url): ?>
+                            <img src="<?= $avatar_url; ?>" alt="Foto Profil Saat Ini" class="rounded-circle shadow mb-3" style="width: 120px; height: 120px; object-fit: cover; border: 4px solid #3b82f6;">
+                        <?php else: ?>
+                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3 shadow" style="width: 120px; height: 120px; font-size: 3.5rem;">
+                                <?= strtoupper(substr($user_data['nama_lengkap'], 0, 1)); ?>
+                            </div>
+                        <?php endif; ?>
+                        <p class="text-muted small mb-0">Pilih berkas gambar foto profil Anda dari perangkat (Maksimal 2MB, Format JPG/PNG/WEBP)</p>
+                    </div>
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label font-semibold">Pilih Berkas Foto <span class="text-danger">*</span></label>
+                        <input type="file" name="avatar" class="form-control bg-light" accept="image/jpeg,image/png,image/webp,image/jpg" required>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light p-3 d-flex justify-content-between">
+                    <div>
+                        <?php if ($avatar_url): ?>
+                            <button type="submit" form="formDeleteAvatar" class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                                <i class="fa-solid fa-trash me-1"></i> Hapus Foto
+                            </button>
+                        <?php endif; ?>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 fw-bold"><i class="fa-solid fa-upload me-1"></i> Unggah Foto</button>
+                    </div>
+                </div>
+            </form>
+            <form id="formDeleteAvatar" action="" method="POST">
+                <input type="hidden" name="action" value="delete_avatar">
+            </form>
         </div>
     </div>
 </div>
