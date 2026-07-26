@@ -26,9 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Silakan isi username/email dan kata sandi Anda.';
     } else {
         if ($pdo) {
-            $stmt = $pdo->prepare("SELECT * FROM users WHERE (username = :ue1 OR email = :ue2) AND status_akun = 'aktif' LIMIT 1");
+            // Hanya izinkan pelapor login di halaman ini
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE (username = :ue1 OR email = :ue2) AND role = 'pelapor' AND status_akun = 'aktif' LIMIT 1");
             $stmt->execute(['ue1' => $username_email, 'ue2' => $username_email]);
             $user = $stmt->fetch();
+
+            // Cek apakah akun adalah admin/petugas yang salah halaman
+            if (!$user) {
+                $stmtCheck = $pdo->prepare("SELECT role FROM users WHERE (username = :ue1 OR email = :ue2) AND role IN ('admin','petugas') LIMIT 1");
+                $stmtCheck->execute(['ue1' => $username_email, 'ue2' => $username_email]);
+                if ($stmtCheck->fetch()) {
+                    $error = 'Akun Admin/Petugas tidak dapat login di sini. Silakan gunakan <a href="' . base_url('login_petugas.php') . '" class="alert-link">Portal Petugas</a>.';
+                }
+            }
 
             if ($user) {
                 if (password_verify($password, $user['password']) || md5($password) === $user['password'] || $password === 'password123') {
@@ -64,70 +74,167 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Now load layout header and navbar ONLY AFTER all redirects are handled
-$page_title = "Masuk Akun - SIPENSO";
+// Now load layout header ONLY AFTER all redirects are handled
+$page_title = "Login Masyarakat - SIPENSO";
 require_once __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/includes/navbar.php';
 ?>
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-5 col-md-7">
+<style>
+    .auth-bg {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+    }
+    .auth-card {
+        background: #ffffff;
+        border-radius: 1.5rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255,255,255,0.8);
+        overflow: hidden;
+        width: 100%;
+        max-width: 440px;
+        position: relative;
+    }
+    .auth-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 6px;
+        background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    }
+    .auth-header {
+        padding: 2.5rem 2.5rem 1.5rem;
+        text-align: center;
+    }
+    .auth-icon-wrapper {
+        width: 72px; height: 72px;
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        color: #3b82f6;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        margin-bottom: 1.25rem;
+        box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 4px 12px rgba(59,130,246,0.15);
+    }
+    .auth-body {
+        padding: 0 2.5rem 2.5rem;
+    }
+    .modern-form-group {
+        position: relative;
+        margin-bottom: 1.25rem;
+    }
+    .modern-form-group i {
+        position: absolute;
+        left: 1.25rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+        font-size: 1.1rem;
+        transition: color 0.3s ease;
+        z-index: 2;
+    }
+    .modern-form-control {
+        width: 100%;
+        padding: 1.1rem 1rem 1.1rem 3.25rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 1rem;
+        font-size: 0.95rem;
+        color: #1e293b;
+        background: #f8fafc;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+    .modern-form-control:focus {
+        border-color: #3b82f6;
+        background: #ffffff;
+        box-shadow: 0 0 0 4px rgba(59,130,246,0.1);
+        outline: none;
+    }
+    .modern-form-control:focus + i, .modern-form-control:not(:placeholder-shown) + i {
+        color: #3b82f6;
+    }
+    .btn-auth {
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        color: #fff;
+        border: none;
+        border-radius: 1rem;
+        padding: 1.1rem;
+        font-weight: 700;
+        font-size: 1.05rem;
+        width: 100%;
+        box-shadow: 0 10px 25px -5px rgba(59,130,246,0.4);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        margin-top: 0.5rem;
+    }
+    .btn-auth:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 30px -5px rgba(59,130,246,0.5);
+        color: #fff;
+    }
+    .auth-footer-text {
+        text-align: center;
+        margin-top: 1.75rem;
+        color: #64748b;
+        font-size: 0.95rem;
+    }
+    .auth-footer-text a {
+        color: #3b82f6;
+        font-weight: 700;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    .auth-footer-text a:hover { color: #1d4ed8; }
+</style>
 
-            <!-- Login Card Form -->
-            <div class="card card-custom border-0 shadow-lg overflow-hidden">
-                <div class="card-header text-white p-4 p-md-5 text-center border-0 position-relative" style="background: linear-gradient(135deg, #090d16 0%, #1e1b4b 50%, #1d4ed8 100%);">
-                    <div class="position-absolute top-0 end-0 opacity-10 p-3">
-                        <i class="fa-solid fa-shield-halved fa-6x text-white"></i>
-                    </div>
-                    <div class="bg-white text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow" style="width: 65px; height: 65px; background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%); border: 3px solid rgba(255,255,255,0.4);">
-                        <i class="fa-solid fa-right-to-bracket fa-xl text-primary"></i>
-                    </div>
-                    <h4 class="fw-bold mb-1 text-white">Masuk ke SIPENSO</h4>
-                    <p class="text-white-50 small mb-0">Sistem Pengaduan Masyarakat Dinas Sosial</p>
-                </div>
-                <div class="card-body p-4 p-md-5">
-                    <?= get_flash(); ?>
-
-                    <?php if (!empty($error)): ?>
-                        <div class="alert alert-danger alert-dismissible fade show rounded-3 shadow-sm" role="alert">
-                            <i class="fa-solid fa-circle-exclamation me-2"></i><?= $error; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
-                    <?php endif; ?>
-
-                    <form action="" method="POST">
-                        <div class="mb-3">
-                            <label class="form-label font-semibold">Username atau Email</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-user text-primary"></i></span>
-                                <input type="text" name="username_email" class="form-control bg-light border-start-0 ps-0" placeholder="Masukkan username / email" value="<?= sanitize($_POST['username_email'] ?? ''); ?>" required autofocus>
-                            </div>
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="form-label font-semibold">Kata Sandi (Password)</label>
-                            <div class="input-group">
-                                <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-lock text-primary"></i></span>
-                                <input type="password" name="password" class="form-control bg-light border-start-0 ps-0" placeholder="Masukkan kata sandi" required>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-sm">
-                            <i class="fa-solid fa-right-to-bracket me-2"></i> Masuk Sekarang
-                        </button>
-                    </form>
-
-                    <div class="mt-4 pt-3 border-top text-center">
-                        <p class="mb-0 text-muted small">Belum memiliki akun Pelapor? 
-                            <a href="<?= base_url('register.php'); ?>" class="fw-bold text-primary text-decoration-none">Daftar Sekarang</a>
-                        </p>
-                    </div>
-                </div>
+<div class="auth-bg">
+    <div class="auth-card">
+        <div class="auth-header">
+            <div class="auth-icon-wrapper">
+                <i class="fa-solid fa-user-check"></i>
             </div>
+            <h3 class="fw-bold mb-1" style="color: #0f172a; letter-spacing: -0.5px;">Login Pelapor</h3>
+            <p class="text-muted small mb-0">Portal Layanan Pengaduan Dinas Sosial</p>
+        </div>
+        
+        <div class="auth-body">
+            <?= get_flash(); ?>
 
+            <?php if (!empty($error)): ?>
+                <div class="alert alert-danger alert-dismissible fade show rounded-4 border-0 shadow-sm" style="background:#fef2f2; color:#991b1b; padding-left: 3.5rem; position:relative;" role="alert">
+                    <i class="fa-solid fa-circle-exclamation position-absolute" style="left:1.25rem; top:1rem; font-size:1.25rem;"></i>
+                    <span class="small fw-semibold"><?= $error; ?></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            <?php endif; ?>
+
+            <form action="" method="POST">
+                <div class="modern-form-group">
+                    <input type="text" name="username_email" class="modern-form-control" placeholder="Username atau Email" value="<?= sanitize($_POST['username_email'] ?? ''); ?>" required autofocus>
+                    <i class="fa-solid fa-at"></i>
+                </div>
+
+                <div class="modern-form-group">
+                    <input type="password" name="password" class="modern-form-control" placeholder="Kata Sandi Anda" required>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <button type="submit" class="btn-auth d-flex align-items-center justify-content-center gap-2">
+                    Masuk Sekarang <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="auth-footer-text">
+                Belum memiliki akun? <a href="<?= base_url('register.php'); ?>">Daftar Disini</a>
+            </div>
         </div>
     </div>
 </div>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+

@@ -135,23 +135,91 @@ INSERT INTO kriteria_prioritas (nama_kriteria, skor_bobot, deskripsi) VALUES
 -- Seed Pengaduan Sample
 INSERT INTO pengaduan (nomor_tiket, user_id, kategori_id, judul, isi_laporan, lokasi_kejadian, tingkat_dampak, jumlah_terdampak, skor_prioritas, prioritas, status) VALUES
 ('TKT-20260725-A101', 4, 1, 'Bantuan BPNT Belum Cair 3 Bulan', 'Saya penerima manfaat BPNT atas nama Ahmad Rizky NIK 3171010101900005, bantuan BPNT kartu KKS tidak terisi dana sejak Mei hingga Juli 2026. Mohon pengecekan status DTKS.', 'Kelurahan Cipinang RT 04 RW 02, Kec. Jatinegara', 'sedang', 1, 5, 'Sedang', 'Diproses'),
-('TKT-20260725-B202', 4, 2, 'Lansia Sebatang Kara Butuh Pendampingan Medis', 'Ditemukan seorang lansia usia ~75 tahun kondisi lemas terlantarkan di pos ronda dekat pasar. Membutuhkan tindakan medis dan penampungan panti sosial.', 'Jl. Pasar Baru No. 88, RT 01 RW 01', 'mendesak', 1, 10, 'Mendesak', 'Prioritas Ditentukan');
+('TKT-20260725-B202', 4, 2, 'Lansia Sebatang Kara Butuh Pendampingan Medis', 'Ditemukan seorang lansia usia ~75 tahun kondisi lemas terlantarkan di pos ronda dekat pasar. Membutuhkan tindakan medis dan penampungan panti sosial.', 'Jl. Pasar Baru No. 88, RT 01 RW 01', 'mendesak', 1, 10, 'Mendesak', 'Prioritas Ditentukan'),
+('TKT-20260710-C303', 4, 3, 'Anak Usia 8 Tahun Terlantar di Pasar', 'Seorang anak laki-laki sekitar 8 tahun ditemukan mengemis dan terlihat tidak terawat di area pasar tradisional. Anak tersebut mengaku tidak tahu alamat rumah dan tidak bersekolah.', 'Pasar Tradisional Pasar Minggu, Jl. Raya Pasar Minggu', 'mendesak', 1, 12, 'Mendesak', 'Selesai'),
+('TKT-20260712-D404', 4, 4, 'Korban Banjir Butuh Bantuan Logistik Darurat', 'Warga RT 07 RW 03 terdampak banjir kiriman sejak 3 hari lalu. Sekitar 25 kepala keluarga mengungsi ke Masjid Al-Ikhlas. Stok makanan dan obat-obatan menipis dan belum ada bantuan.', 'RT 07 RW 03, Kel. Bukit Duri, Kec. Tebet', 'tinggi', 25, 9, 'Tinggi', 'Diproses'),
+('TKT-20260715-E505', 4, 5, 'Pengemis dan Tunawisma di Terminal Bus', 'Terdapat sekitar 6-8 orang PMKS (gepeng/tunawisma) yang tinggal dan beristirahat di sudut Terminal Kampung Melayu. Kondisi memprihatinkan dan mengganggu ketertiban terminal.', 'Terminal Kampung Melayu, Jakarta Timur', 'sedang', 7, 4, 'Sedang', 'Diverifikasi'),
+('TKT-20260718-F606', 4, 1, 'Data Penerima PKH Tidak Sesuai, Warga Mampu Dapat Bansos', 'Tetangga saya yang memiliki kendaraan pribadi dan usaha warung makan masih terdaftar sebagai penerima PKH. Sementara keluarga saya yang benar-benar miskin tidak masuk DTKS.', 'Jl. Kebon Nanas Selatan RT 02 RW 08, Jakarta Timur', 'sedang', 1, 5, 'Sedang', 'Pengaduan Masuk'),
+('TKT-20260720-G707', 4, 2, 'Lansia 82 Tahun Lumpuh Tidak Ada yang Merawat', 'Nenek Sumiati, 82 tahun, kondisi lumpuh dan hidup sebatang kara. Beliau tinggal di rumah tidak layak huni dan membutuhkan penempatan di panti jompo segera.', 'Jl. Cempaka Putih Timur No. 17, Jakarta Pusat', 'mendesak', 1, 11, 'Mendesak', 'Selesai'),
+('TKT-20260722-H808', 4, 3, 'Remaja ABH 15 Tahun Butuh Pendampingan Hukum', 'Seorang remaja usia 15 tahun ditangkap polisi karena terlibat kasus pencurian. Remaja tersebut merupakan anak yatim piatu dan membutuhkan pendampingan hukum serta rehabilitasi sosial.', 'Polsek Matraman, Jakarta Timur', 'tinggi', 1, 8, 'Tinggi', 'Diklasifikasikan'),
+('TKT-20260723-I909', 4, 4, 'Korban Kebakaran 47 Jiwa Kehilangan Tempat Tinggal', 'Kebakaran hebat menghanguskan 12 rumah warga di pemukiman padat. Sebanyak 47 jiwa kehilangan tempat tinggal dan membutuhkan bantuan sandang, pangan, dan hunian sementara.', 'Jl. Kampung Bali RT 05 RW 03, Tanah Abang', 'mendesak', 47, 14, 'Mendesak', 'Diproses'),
+('TKT-20260723-J010', 4, 5, 'Pengamen Anak di Bawah Umur di Lampu Merah', 'Ada anak-anak di bawah umur (sekitar 10-14 tahun) yang mengamen di persimpangan lampu merah setiap hari dari pagi hingga malam hari tanpa pengawasan orang dewasa.', 'Perempatan Jl. Gatot Subroto - Jl. MT. Haryono', 'rendah', 4, 3, 'Rendah', 'Ditolak'),
+('TKT-20260724-K111', 4, 1, 'Penyaluran Beras Bansos Tidak Merata di RW 04', 'Penyaluran beras bantuan sosial di RW kami tidak merata. Beberapa warga mampu mendapatkan jatah, sementara warga kurang mampu justru tidak mendapat. Mohon verifikasi ulang.', 'RW 04, Kel. Pisangan Baru, Kec. Matraman', 'sedang', 12, 6, 'Sedang', 'Prioritas Ditentukan'),
+('TKT-20260725-L212', 4, 2, 'Penyandang Disabilitas Berat Butuh Kursi Roda', 'Warga disabilitas fisik (lumpuh kedua kaki) bernama Pak Suroso, 45 tahun, tidak memiliki kursi roda dan alat bantu jalan. Kondisi ekonomi sangat terbatas dan membutuhkan bantuan assistive device.', 'Jl. Otista Raya No. 33, Jatinegara, Jakarta Timur', 'sedang', 1, 5, 'Sedang', 'Diproses');
 
 -- Seed Lampiran Sample
 INSERT INTO lampiran (pengaduan_id, nama_file, tipe_file, ukuran_file, jenis_lampiran) VALUES
 (1, 'kks_bukti.jpg', 'image/jpeg', 102400, 'bukti_pelapor'),
-(2, 'lansia_terlantarkan.jpg', 'image/jpeg', 204800, 'bukti_pelapor');
+(2, 'lansia_terlantarkan.jpg', 'image/jpeg', 204800, 'bukti_pelapor'),
+(3, 'foto_anak_terlantar.jpg', 'image/jpeg', 153600, 'bukti_pelapor'),
+(4, 'kondisi_banjir.jpg', 'image/jpeg', 307200, 'bukti_pelapor'),
+(4, 'pengungsi_masjid.jpg', 'image/jpeg', 256000, 'bukti_pelapor'),
+(7, 'foto_nenek_sumiati.jpg', 'image/jpeg', 184320, 'bukti_pelapor'),
+(9, 'foto_korban_kebakaran.jpg', 'image/jpeg', 204800, 'bukti_pelapor'),
+(9, 'bukti_penyelesaian_kebakaran.pdf', 'application/pdf', 512000, 'bukti_penyelesaian'),
+(11, 'daftar_penerima_bansos.pdf', 'application/pdf', 512000, 'bukti_pelapor'),
+(12, 'foto_pak_suroso.jpg', 'image/jpeg', 128000, 'bukti_pelapor');
 
 -- Seed Tanggapan Sample
 INSERT INTO tanggapan (pengaduan_id, petugas_id, isi_tanggapan, status_tanggapan) VALUES
-(1, 2, 'Laporan telah diverifikasi. Petugas telah melakukan pengecekan data di SIKS-NG. Data KKS Anda sedang dalam proses pemutakhiran rekening oleh pihak bank penyalur.', 'Diproses');
+(1, 2, 'Laporan telah diverifikasi. Petugas telah melakukan pengecekan data di SIKS-NG. Data KKS Anda sedang dalam proses pemutakhiran rekening oleh pihak bank penyalur.', 'Diproses'),
+(3, 2, 'Anak telah ditemukan dan dibawa ke Rumah Singgah Dinas Sosial. Tim TKSK sedang melakukan penelusuran identitas dan orang tua. Anak dalam kondisi sehat dan aman.', 'Selesai'),
+(3, 3, 'Proses penanganan telah selesai. Anak berhasil dipertemukan dengan pihak keluarga. Pendampingan lanjutan oleh pekerja sosial akan dilakukan selama 3 bulan.', 'Selesai'),
+(4, 3, 'Tim Tagana telah diterjunkan ke lokasi pengungsian. Bantuan logistik berupa beras 500kg, mie instan, dan air mineral telah didistribusikan. Proses evakuasi masih berlangsung.', 'Diproses'),
+(5, 2, 'Laporan telah diterima dan diverifikasi. Koordinasi dengan Satpol PP dan Tim Penjangkauan PMKS sedang dilakukan untuk penertiban dan pembinaan sosial.', 'Diverifikasi'),
+(7, 3, 'Nenek Sumiati telah berhasil ditempatkan di Panti Wredha Budi Mulia 1. Proses administrasi dan pemeriksaan kesehatan awal telah selesai dilakukan. Kasus dinyatakan selesai ditangani.', 'Selesai'),
+(9, 2, 'Tim Tagana dan relawan sosial telah mendirikan tenda pengungsian darurat. Bantuan sandang dan pangan untuk 47 jiwa telah disalurkan dan proses pengurusan hunian sementara sedang berjalan.', 'Diproses'),
+(11, 3, 'Data penerima bansos RW 04 sedang dilakukan verifikasi ulang bersama tim DTKS kelurahan. Proses pemutakhiran data diperkirakan selesai dalam 14 hari kerja.', 'Diproses'),
+(12, 2, 'Permohonan bantuan kursi roda untuk Pak Suroso telah dicatat. Tim penilai sosial dijadwalkan melakukan kunjungan rumah pada minggu depan untuk asesmen kebutuhan.', 'Diproses');
 
 -- Seed Riwayat Status Sample
 INSERT INTO riwayat_status (pengaduan_id, user_id, status_lama, status_baru, catatan) VALUES
 (1, 4, NULL, 'Pengaduan Masuk', 'Pengaduan berhasil dikirim oleh pelapor'),
 (1, 2, 'Pengaduan Masuk', 'Diverifikasi', 'Berkas dan lokasi laporan telah diverifikasi oleh Petugas Budi Santoso'),
 (1, 2, 'Diverifikasi', 'Diklasifikasikan', 'Pengaduan diklasifikasikan ke Kategori Bantuan Sosial'),
-(1, 2, 'Diklasifikasikan', 'Diproses', 'Diproses tindak lanjut pengecekan SIKS-NG');
+(1, 2, 'Diklasifikasikan', 'Diproses', 'Diproses tindak lanjut pengecekan SIKS-NG'),
+(2, 4, NULL, 'Pengaduan Masuk', 'Pengaduan masuk dari pelapor'),
+(2, 3, 'Pengaduan Masuk', 'Diverifikasi', 'Laporan diverifikasi oleh Petugas Siti Rahmawati'),
+(2, 3, 'Diverifikasi', 'Diklasifikasikan', 'Diklasifikasikan ke kategori Disabilitas & Lansia'),
+(2, 3, 'Diklasifikasikan', 'Prioritas Ditentukan', 'Prioritas Mendesak ditetapkan karena ancaman jiwa'),
+(3, 4, NULL, 'Pengaduan Masuk', 'Pengaduan masuk dari pelapor'),
+(3, 2, 'Pengaduan Masuk', 'Diverifikasi', 'Diverifikasi dan tim lapangan diturunkan'),
+(3, 2, 'Diverifikasi', 'Diklasifikasikan', 'Diklasifikasikan Perlindungan Anak'),
+(3, 2, 'Diklasifikasikan', 'Prioritas Ditentukan', 'Prioritas Mendesak'),
+(3, 2, 'Prioritas Ditentukan', 'Diproses', 'Anak dibawa ke Rumah Singgah'),
+(3, 3, 'Diproses', 'Selesai', 'Anak berhasil dipertemukan dengan keluarga'),
+(4, 4, NULL, 'Pengaduan Masuk', 'Pengaduan darurat banjir masuk'),
+(4, 3, 'Pengaduan Masuk', 'Diverifikasi', 'Tim Tagana konfirmasi kondisi lapangan'),
+(4, 3, 'Diverifikasi', 'Diklasifikasikan', 'Diklasifikasikan Korban Bencana'),
+(4, 3, 'Diklasifikasikan', 'Prioritas Ditentukan', 'Prioritas Tinggi - 25 KK terdampak'),
+(4, 3, 'Prioritas Ditentukan', 'Diproses', 'Bantuan logistik disalurkan'),
+(5, 4, NULL, 'Pengaduan Masuk', 'Pengaduan PMKS masuk'),
+(5, 2, 'Pengaduan Masuk', 'Diverifikasi', 'Diverifikasi koordinasi Satpol PP'),
+(6, 4, NULL, 'Pengaduan Masuk', 'Pengaduan data bansos tidak tepat sasaran masuk'),
+(7, 4, NULL, 'Pengaduan Masuk', 'Pengaduan lansia terlantar masuk'),
+(7, 3, 'Pengaduan Masuk', 'Diverifikasi', 'Kunjungan rumah dilakukan petugas'),
+(7, 3, 'Diverifikasi', 'Diklasifikasikan', 'Diklasifikasikan Disabilitas & Lansia'),
+(7, 3, 'Diklasifikasikan', 'Prioritas Ditentukan', 'Prioritas Mendesak - lansia lumpuh sebatang kara'),
+(7, 3, 'Prioritas Ditentukan', 'Diproses', 'Proses penempatan panti jompo'),
+(7, 3, 'Diproses', 'Selesai', 'Nenek Sumiati berhasil masuk Panti Wredha'),
+(8, 4, NULL, 'Pengaduan Masuk', 'Pengaduan ABH remaja masuk'),
+(8, 2, 'Pengaduan Masuk', 'Diverifikasi', 'Koordinasi dengan Polsek'),
+(8, 2, 'Diverifikasi', 'Diklasifikasikan', 'Diklasifikasikan Perlindungan Anak & ABH'),
+(9, 4, NULL, 'Pengaduan Masuk', 'Pengaduan darurat kebakaran masuk'),
+(9, 2, 'Pengaduan Masuk', 'Diverifikasi', 'Tim verifikasi turun ke lokasi'),
+(9, 2, 'Diverifikasi', 'Diklasifikasikan', 'Diklasifikasikan Korban Bencana'),
+(9, 2, 'Diklasifikasikan', 'Prioritas Ditentukan', 'Prioritas Mendesak - 47 jiwa terdampak'),
+(9, 2, 'Prioritas Ditentukan', 'Diproses', 'Tenda dan bantuan darurat didirikan'),
+(10, 4, NULL, 'Pengaduan Masuk', 'Pengaduan PMKS anak masuk'),
+(10, 3, 'Pengaduan Masuk', 'Ditolak', 'Ditolak - bukan kewenangan Dinsos, dilimpahkan ke Satpol PP'),
+(11, 4, NULL, 'Pengaduan Masuk', 'Pengaduan ketidakmerataan bansos masuk'),
+(11, 3, 'Pengaduan Masuk', 'Diverifikasi', 'Diverifikasi data penerima RW 04'),
+(11, 3, 'Diverifikasi', 'Diklasifikasikan', 'Diklasifikasikan ketidaktepatan sasaran bansos'),
+(11, 3, 'Diklasifikasikan', 'Prioritas Ditentukan', 'Prioritas Sedang - 12 orang terdampak'),
+(12, 4, NULL, 'Pengaduan Masuk', 'Pengaduan kebutuhan kursi roda masuk'),
+(12, 2, 'Pengaduan Masuk', 'Diverifikasi', 'Verifikasi kondisi Pak Suroso'),
+(12, 2, 'Diverifikasi', 'Diklasifikasikan', 'Diklasifikasikan Disabilitas & Lansia'),
+(12, 2, 'Diklasifikasikan', 'Diproses', 'Asesmen kebutuhan dijadwalkan');
 
 -- 8. Table Log Aktivitas (Complex Audit Trail)
 CREATE TABLE log_aktivitas (

@@ -81,13 +81,6 @@ $avatar_url = (!empty($foto_profil) && file_exists(__DIR__ . '/../assets/uploads
                             </li>
                         </ul>
                     </div>
-                <?php else: ?>
-                    <a href="<?= base_url('login.php'); ?>" class="btn btn-outline-light rounded-pill px-4 me-2">
-                        <i class="fa-solid fa-right-to-bracket me-1"></i> Masuk
-                    </a>
-                    <a href="<?= base_url('register.php'); ?>" class="btn btn-primary rounded-pill px-4">
-                        <i class="fa-solid fa-user-plus me-1"></i> Daftar
-                    </a>
                 <?php endif; ?>
             </div>
         </div>
