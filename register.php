@@ -107,17 +107,13 @@ require_once __DIR__ . '/includes/header.php';
         padding: 2.5rem 3rem 1.5rem;
         text-align: center;
     }
-    .auth-icon-wrapper {
-        width: 72px; height: 72px;
-        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-        color: #3b82f6;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.8rem;
+    .auth-logo {
+        width: 88px;
+        height: 94px;
+        object-fit: contain;
+        display: inline-block;
         margin-bottom: 1.25rem;
-        box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 4px 12px rgba(59,130,246,0.15);
+        filter: drop-shadow(0 6px 10px rgba(15, 23, 42, 0.15));
     }
     .auth-body {
         padding: 0 3rem 3rem;
@@ -213,9 +209,7 @@ require_once __DIR__ . '/includes/header.php';
 <div class="auth-bg">
     <div class="auth-card">
         <div class="auth-header">
-            <div class="auth-icon-wrapper">
-                <i class="fa-solid fa-user-plus"></i>
-            </div>
+            <img src="<?= base_url('assets/1.png'); ?>" alt="Logo SIPENSO" class="auth-logo">
             <h3 class="fw-bold mb-1" style="color: #0f172a; letter-spacing: -0.5px;">Registrasi Akun</h3>
             <p class="text-muted small mb-0">Daftar untuk mengajukan &amp; memantau pengaduan ke Dinas Sosial</p>
         </div>

@@ -100,18 +100,13 @@ require_once __DIR__ . '/includes/header.php';
         padding: 2.5rem 2.5rem 1.5rem;
         text-align: center;
     }
-    .auth-icon-wrapper-petugas {
-        width: 72px; height: 72px;
-        background: rgba(255,255,255,0.1);
-        color: #818cf8;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.8rem;
+    .auth-logo-petugas {
+        width: 88px;
+        height: 94px;
+        object-fit: contain;
+        display: inline-block;
         margin-bottom: 1.25rem;
-        border: 1px solid rgba(255,255,255,0.15);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.35));
     }
     .auth-body-petugas {
         padding: 0 2.5rem 2.5rem;
@@ -190,9 +185,7 @@ require_once __DIR__ . '/includes/header.php';
 <div class="auth-bg-petugas">
     <div class="auth-card-petugas">
         <div class="auth-header-petugas">
-            <div class="auth-icon-wrapper-petugas">
-                <i class="fa-solid fa-user-shield"></i>
-            </div>
+            <img src="<?= base_url('assets/1.png'); ?>" alt="Logo SIPENSO" class="auth-logo-petugas">
             <h3 class="fw-bold mb-1" style="color: #f8fafc; letter-spacing: -0.5px;">Portal Petugas</h3>
             <p class="text-slate-400 small mb-0" style="color: #94a3b8;">Sistem Internal Dinas Sosial</p>
         </div>

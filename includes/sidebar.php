@@ -2,86 +2,85 @@
 $current_page = basename($_SERVER['PHP_SELF']);
 $role = $_SESSION['role'] ?? '';
 ?>
-<nav id="sidebar">
-    <div class="sidebar-header">
-        <div class="d-flex align-items-center gap-2">
-            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
-                <i class="fa-solid fa-user-shield"></i>
-            </div>
-            <div class="overflow-hidden">
-                <h6 class="mb-0 text-white font-semibold text-truncate" style="max-width: 170px;"><?= sanitize($_SESSION['nama_lengkap'] ?? 'User'); ?></h6>
-                <small class="text-xs text-primary text-uppercase fw-bold"><?= strtoupper($role); ?></small>
+<nav id="sidebar" class="d-flex flex-column">
+    <div class="sidebar-header d-flex flex-column align-items-center pt-4 pb-3" style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="d-flex align-items-center gap-3 w-100 px-4 mb-2">
+            <img src="<?= base_url('assets/1.png'); ?>" alt="Logo Dinas Sosial" class="sidebar-brand-logo">
+            <div class="text-white fw-bold lh-sm flex-grow-1" style="font-size: 0.85rem; letter-spacing: 0.5px;">
+                DINAS SOSIAL<br>
+                KAB. LABUHANBATU
             </div>
         </div>
     </div>
 
-    <ul class="list-unstyled components">
-        <?php if ($role === 'admin'): ?>
-            <li class="<?= $current_page == 'dashboard.php' ? 'active' : ''; ?>">
-                <a href="<?= base_url('admin/dashboard.php'); ?>">
-                    <i class="fa-solid fa-chart-pie"></i> Dashboard Admin
-                </a>
-            </li>
-            <li class="<?= $current_page == 'pengaduan.php' ? 'active' : ''; ?>">
-                <a href="<?= base_url('admin/pengaduan.php'); ?>">
-                    <i class="fa-solid fa-folder-open"></i> Kelola Pengaduan
-                </a>
-            </li>
-            <li class="<?= $current_page == 'users.php' ? 'active' : ''; ?>">
-                <a href="<?= base_url('admin/users.php'); ?>">
-                    <i class="fa-solid fa-users-gear"></i> Kelola Akun User
-                </a>
-            </li>
-            <li class="<?= $current_page == 'kategori.php' ? 'active' : ''; ?>">
-                <a href="<?= base_url('admin/kategori.php'); ?>">
-                    <i class="fa-solid fa-tags"></i> Kategori Pengaduan
-                </a>
-            </li>
-            <li class="<?= $current_page == 'kriteria.php' ? 'active' : ''; ?>">
-                <a href="<?= base_url('admin/kriteria.php'); ?>">
-                    <i class="fa-solid fa-sliders"></i> Kriteria Prioritas
-                </a>
-            </li>
-            <li class="<?= $current_page == 'laporan.php' ? 'active' : ''; ?>">
-                <a href="<?= base_url('admin/laporan.php'); ?>">
-                    <i class="fa-solid fa-file-invoice"></i> Rekap &amp; Cetak Laporan
-                </a>
-            </li>
-        <?php elseif ($role === 'petugas'): ?>
-            <li class="<?= $current_page == 'dashboard.php' ? 'active' : ''; ?>">
-                <a href="<?= base_url('petugas/dashboard.php'); ?>">
-                    <i class="fa-solid fa-list-check"></i> Antrean Pengaduan
-                </a>
-            </li>
-            <li class="<?= $current_page == 'laporan.php' ? 'active' : ''; ?>">
-                <a href="<?= base_url('admin/laporan.php'); ?>">
-                    <i class="fa-solid fa-file-invoice"></i> Laporan Rekapitulasi
-                </a>
-            </li>
-        <?php elseif ($role === 'pelapor'): ?>
-            <li class="<?= $current_page == 'dashboard.php' ? 'active' : ''; ?>">
-                <a href="<?= base_url('pelapor/dashboard.php'); ?>">
-                    <i class="fa-solid fa-gauge"></i> Dashboard Saya
-                </a>
-            </li>
-            <li class="<?= $current_page == 'buat_pengaduan.php' ? 'active' : ''; ?>">
-                <a href="<?= base_url('pelapor/buat_pengaduan.php'); ?>">
-                    <i class="fa-solid fa-paper-plane"></i> Buat Pengaduan
-                </a>
-            </li>
-            <li class="<?= $current_page == 'riwayat.php' ? 'active' : ''; ?>">
-                <a href="<?= base_url('pelapor/riwayat.php'); ?>">
-                    <i class="fa-solid fa-clock-history"></i> Riwayat Pengaduan
-                </a>
-            </li>
-        <?php endif; ?>
+    <!-- Scrollable Menu -->
+    <div class="overflow-auto flex-grow-1 sidebar-scroll">
+        <ul class="list-unstyled components mt-3 mb-0">
+            <?php if ($role === 'admin'): ?>
+                <li class="<?= $current_page == 'dashboard.php' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('admin/dashboard.php'); ?>"><i class="fa-solid fa-house"></i> Dashboard</a>
+                </li>
+                <li class="<?= $current_page == 'pengaduan.php' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('admin/pengaduan.php'); ?>"><i class="fa-solid fa-folder-open"></i> Data Pengaduan</a>
+                </li>
+                <li class="<?= $current_page == 'kategori.php' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('admin/kategori.php'); ?>"><i class="fa-solid fa-layer-group"></i> Klasifikasi Pengaduan</a>
+                </li>
+                <li class="<?= $current_page == 'kriteria.php' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('admin/kriteria.php'); ?>"><i class="fa-solid fa-triangle-exclamation"></i> Prioritas Penanganan</a>
+                </li>
+                <li class="<?= $current_page == 'tindak_lanjut.php' ? 'active' : ''; ?>">
+                    <a href="#"><i class="fa-solid fa-clipboard-check"></i> Tindak Lanjut</a>
+                </li>
+                <li class="<?= $current_page == 'masyarakat.php' ? 'active' : ''; ?>">
+                    <a href="#"><i class="fa-solid fa-users"></i> Data Masyarakat</a>
+                </li>
+                <li class="<?= $current_page == 'laporan.php' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('admin/laporan.php'); ?>"><i class="fa-solid fa-file-invoice"></i> Laporan</a>
+                </li>
+                <li class="<?= $current_page == 'statistik.php' ? 'active' : ''; ?>">
+                    <a href="#"><i class="fa-solid fa-chart-line"></i> Grafik &amp; Statistik</a>
+                </li>
+                <li class="<?= $current_page == 'pengaturan.php' ? 'active' : ''; ?>">
+                    <a href="#"><i class="fa-solid fa-gear"></i> Pengaturan</a>
+                </li>
+                <li class="<?= $current_page == 'users.php' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('admin/users.php'); ?>"><i class="fa-solid fa-user-shield"></i> User Management</a>
+                </li>
 
-        <li class="mt-4 border-top border-secondary pt-2">
-            <a href="<?= base_url('logout.php'); ?>" class="text-danger">
-                <i class="fa-solid fa-right-from-bracket text-danger"></i> Keluar (Logout)
-            </a>
-        </li>
-    </ul>
+            <?php elseif ($role === 'pelapor'): ?>
+                <!-- Pelapor Specific Menu matching the stylistic approach -->
+                <li class="<?= $current_page == 'dashboard.php' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('pelapor/dashboard.php'); ?>"><i class="fa-solid fa-house"></i> Dashboard</a>
+                </li>
+                <li class="<?= $current_page == 'buat_pengaduan.php' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('pelapor/buat_pengaduan.php'); ?>"><i class="fa-solid fa-plus-circle"></i> Buat Pengaduan</a>
+                </li>
+                <li class="<?= $current_page == 'riwayat.php' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('pelapor/riwayat.php'); ?>"><i class="fa-solid fa-clock-history"></i> Riwayat Pengaduan</a>
+                </li>
+                <li class="<?= $current_page == 'profil.php' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('profile.php'); ?>"><i class="fa-regular fa-circle-user"></i> Profil Saya</a>
+                </li>
+            <?php endif; ?>
+
+            <li class="mt-2 mb-3">
+                <a href="<?= base_url('logout.php'); ?>" class="text-danger">
+                    <i class="fa-solid fa-right-from-bracket text-pink-500"></i> <span style="color: #ec4899;">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Bottom Illustration & Text -->
+    <div class="sidebar-footer px-4 pb-4 pt-3 text-center" style="border-top: 1px solid rgba(255,255,255,0.05); background: var(--sidebar-bg);">
+        <div class="d-flex justify-content-center mb-2">
+            <i class="fa-solid fa-building-columns text-primary opacity-50" style="font-size: 3rem;"></i>
+        </div>
+        <p class="text-white-50 fst-italic mb-0" style="font-size: 0.75rem;">
+            "Melayani dengan Hati<br>Bersama untuk Masyarakat"
+        </p>
+    </div>
 </nav>
 
 <script>

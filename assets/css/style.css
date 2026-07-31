@@ -13,14 +13,14 @@
     --warning-color: #f59e0b;
     --danger-color: #ef4444;
     
-    --bg-body: #0f172a;
-    --bg-body-light: #f8fafc;
+    --bg-body: #f8fafc;
+    --bg-body-light: #f1f5f9;
     --card-bg: #ffffff;
     --text-main: #0f172a;
     --text-muted: #64748b;
     
-    --sidebar-bg: #090d16;
-    --sidebar-hover: #1e293b;
+    --sidebar-bg: #1e1b4b;
+    --sidebar-hover: #312e81;
     --border-color: #e2e8f0;
     
     --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
@@ -46,26 +46,33 @@ body {
    GLASSMORPHISM & NAVBAR
    =================================================== */
 .navbar-custom {
-    background: rgba(9, 13, 22, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: #ffffff;
+    border-bottom: 2px solid #eef2f6;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     transition: var(--transition-smooth);
+    padding: 10px 0;
+}
+
+@media (min-width: 992px) {
+    .navbar-custom {
+        width: calc(100% - 270px);
+        margin-left: 270px;
+    }
 }
 
 .btn-navbar-user {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    color: #fff;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0 !important;
+    color: var(--text-main);
     transition: all 0.2s ease;
 }
 .btn-navbar-user:hover,
 .btn-navbar-user:focus,
 .btn-navbar-user.show {
-    background: rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    color: #fff !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: var(--text-main) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
 }
 
 .brand-title {
@@ -199,6 +206,12 @@ body {
     min-height: calc(100vh - 65px);
 }
 
+@media (min-width: 992px) {
+    .wrapper-admin {
+        padding-left: 270px;
+    }
+}
+
 #sidebar {
     min-width: 270px;
     max-width: 270px;
@@ -207,6 +220,12 @@ body {
     transition: var(--transition-smooth);
     box-shadow: 6px 0 25px rgba(0, 0, 0, 0.15);
     z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    align-self: stretch;
+    overflow-y: auto;
+    height: 100vh;
 }
 
 #sidebar.collapsed {
@@ -217,6 +236,16 @@ body {
     padding: 24px 20px;
     background: rgba(0, 0, 0, 0.25);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sidebar-brand-logo {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: #ffffff;
+    padding: 3px;
+    flex-shrink: 0;
 }
 
 #sidebar ul.components {
@@ -250,14 +279,16 @@ body {
 
 #sidebar ul li.active > a {
     color: #ffffff;
-    background: linear-gradient(90deg, rgba(59, 130, 246, 0.18) 0%, rgba(59, 130, 246, 0) 100%);
-    border-left-color: var(--primary-color);
-    font-weight: 700;
+    background: var(--primary-color);
+    border-radius: 12px;
+    margin: 0 16px;
+    padding-left: 16px;
+    font-weight: 600;
 }
 
 #sidebar ul li.active > a i {
-    color: var(--primary-light);
-    transform: scale(1.1);
+    color: #ffffff;
+    transform: scale(1.05);
 }
 
 #content {
@@ -275,6 +306,7 @@ body {
         top: 65px;
         bottom: 0;
         left: 0;
+        height: auto;
     }
     #sidebar.active {
         margin-left: 0;

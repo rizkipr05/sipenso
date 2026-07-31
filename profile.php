@@ -1,7 +1,7 @@
 <?php
 $page_title = "Profil Saya - SIPENSO";
-require_once __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/includes/navbar.php';
+require_once __DIR__ . '/config/helpers.php';
+require_once __DIR__ . '/config/database.php';
 
 check_login();
 
@@ -215,6 +215,11 @@ if ($pdo) {
 
 $avatar_exists = (!empty($user_data['foto_profil']) && file_exists(__DIR__ . '/assets/uploads/avatars/' . $user_data['foto_profil']));
 $avatar_url = $avatar_exists ? base_url('assets/uploads/avatars/' . $user_data['foto_profil']) : null;
+
+// Render HTML only after all POST handling and redirects have completed.
+// This prevents "headers already sent" and the resulting partially blank page.
+require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/includes/navbar.php';
 ?>
 
 <div class="wrapper-admin">
