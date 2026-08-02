@@ -2,7 +2,6 @@
 $page_title = "Riwayat Pengaduan - SIPENSO";
 $active_nav = "riwayat";
 require_once __DIR__ . '/../includes/header.php';
-require_once __DIR__ . '/../includes/navbar.php';
 require_once __DIR__ . '/../config/classifier.php';
 
 check_role(['pelapor']);

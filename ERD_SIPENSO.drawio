@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+	<root>
+		<mxCell id="0"/>
+		<mxCell id="1" parent="0"/>
+		
+		<!-- Tabel Users -->
+		<mxCell id="users" value="Tabel Users" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;align=center;" vertex="1" parent="1">
+			<mxGeometry x="100" y="100" width="180" height="250" as="geometry"/>
+		</mxCell>
+		<mxCell id="users_f" value="id (PK)&#xa;nik&#xa;nama_lengkap&#xa;email&#xa;foto_profil&#xa;no_hp&#xa;alamat&#xa;username&#xa;password&#xa;role&#xa;status_akun&#xa;created_at" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;fillColor=none;strokeColor=none;fontColor=#000000;whiteSpace=wrap;" vertex="1" parent="users">
+			<mxGeometry y="30" width="180" height="220" as="geometry"/>
+		</mxCell>
+
+		<!-- Tabel Kategori -->
+		<mxCell id="kategori" value="Tabel Kategori" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;align=center;" vertex="1" parent="1">
+			<mxGeometry x="350" y="100" width="180" height="150" as="geometry"/>
+		</mxCell>
+		<mxCell id="kategori_f" value="id (PK)&#xa;kode_kategori&#xa;nama_kategori&#xa;deskripsi&#xa;created_at" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;fillColor=none;strokeColor=none;fontColor=#000000;whiteSpace=wrap;" vertex="1" parent="kategori">
+			<mxGeometry y="30" width="180" height="120" as="geometry"/>
+		</mxCell>
+
+		<!-- Tabel Pengaduan -->
+		<mxCell id="pengaduan" value="Tabel Pengaduan" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;align=center;" vertex="1" parent="1">
+			<mxGeometry x="350" y="320" width="180" height="250" as="geometry"/>
+		</mxCell>
+		<mxCell id="pengaduan_f" value="id (PK)&#xa;nomor_tiket&#xa;user_id (FK)&#xa;kategori_id (FK)&#xa;judul&#xa;isi_laporan&#xa;lokasi_kejadian&#xa;skor_prioritas&#xa;prioritas&#xa;status&#xa;created_at" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;fillColor=none;strokeColor=none;fontColor=#000000;whiteSpace=wrap;" vertex="1" parent="pengaduan">
+			<mxGeometry y="30" width="180" height="220" as="geometry"/>
+		</mxCell>
+
+		<!-- Tabel Lampiran -->
+		<mxCell id="lampiran" value="Tabel Lampiran" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;align=center;" vertex="1" parent="1">
+			<mxGeometry x="600" y="100" width="180" height="170" as="geometry"/>
+		</mxCell>
+		<mxCell id="lampiran_f" value="id (PK)&#xa;pengaduan_id (FK)&#xa;nama_file&#xa;tipe_file&#xa;ukuran_file&#xa;jenis_lampiran&#xa;uploaded_at" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;fillColor=none;strokeColor=none;fontColor=#000000;whiteSpace=wrap;" vertex="1" parent="lampiran">
+			<mxGeometry y="30" width="180" height="140" as="geometry"/>
+		</mxCell>
+
+		<!-- Tabel Tanggapan -->
+		<mxCell id="tanggapan" value="Tabel Tanggapan" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;align=center;" vertex="1" parent="1">
+			<mxGeometry x="600" y="320" width="180" height="160" as="geometry"/>
+		</mxCell>
+		<mxCell id="tanggapan_f" value="id (PK)&#xa;pengaduan_id (FK)&#xa;petugas_id (FK)&#xa;isi_tanggapan&#xa;status_tanggapan&#xa;created_at" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=5;fillColor=none;strokeColor=none;fontColor=#000000;whiteSpace=wrap;" vertex="1" parent="tanggapan">
+			<mxGeometry y="30" width="180" height="130" as="geometry"/>
+		</mxCell>
+
+		<!-- Edges / Relations -->
+		<mxCell id="e_pengaduan_user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;endSize=6;" edge="1" parent="1" source="pengaduan" target="users">
+			<mxGeometry relative="1" as="geometry">
+				<Array as="points"><mxPoint x="320" y="445"/><mxPoint x="320" y="225"/></Array>
+			</mxGeometry>
+		</mxCell>
+		
+		<mxCell id="e_pengaduan_kategori" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;endSize=6;" edge="1" parent="1" source="pengaduan" target="kategori">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		
+		<mxCell id="e_lampiran_pengaduan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;endSize=6;" edge="1" parent="1" source="lampiran" target="pengaduan">
+			<mxGeometry relative="1" as="geometry">
+				<Array as="points"><mxPoint x="570" y="185"/><mxPoint x="570" y="445"/></Array>
+			</mxGeometry>
+		</mxCell>
+		
+		<mxCell id="e_tanggapan_pengaduan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;endSize=6;" edge="1" parent="1" source="tanggapan" target="pengaduan">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		
+		<mxCell id="e_tanggapan_user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endArrow=block;endFill=1;endSize=6;" edge="1" parent="1" source="tanggapan" target="users">
+			<mxGeometry relative="1" as="geometry">
+				<Array as="points"><mxPoint x="690" y="520"/><mxPoint x="140" y="520"/></Array>
+			</mxGeometry>
+		</mxCell>
+
+	</root>
+</mxGraphModel>

@@ -1,7 +1,6 @@
 <?php
 $page_title = "Verifikasi & Penanganan Pengaduan - SIPENSO";
 require_once __DIR__ . '/../includes/header.php';
-require_once __DIR__ . '/../includes/navbar.php';
 require_once __DIR__ . '/../config/classifier.php';
 
 check_role(['petugas', 'admin']);

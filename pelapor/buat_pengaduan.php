@@ -2,7 +2,6 @@
 $page_title = "Buat Pengaduan Baru - SIPENSO";
 $active_nav = "buat";
 require_once __DIR__ . '/../includes/header.php';
-require_once __DIR__ . '/../includes/navbar.php';
 require_once __DIR__ . '/../config/classifier.php';
 
 check_role(['pelapor']);
@@ -88,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<?php require_once __DIR__ . '/../includes/navbar.php'; ?>
 <div class="wrapper-admin">
     <?php require_once __DIR__ . '/../includes/sidebar.php'; ?>
 

@@ -1,7 +1,6 @@
 <?php
 $page_title = "Dashboard Pelapor - SIPENSO";
 require_once __DIR__ . '/../includes/header.php';
-require_once __DIR__ . '/../includes/navbar.php';
 
 check_role(['pelapor']);
 $user_id = $_SESSION['user_id'];
@@ -36,6 +35,7 @@ if ($pdo) {
 }
 ?>
 
+<?php require_once __DIR__ . '/../includes/navbar.php'; ?>
 <div class="wrapper-admin">
     <?php require_once __DIR__ . '/../includes/sidebar.php'; ?>
 

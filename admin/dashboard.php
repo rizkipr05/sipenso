@@ -47,7 +47,7 @@ if ($pdo) {
         <div class="container-fluid px-3 py-2">
             <?= get_flash(); ?>
             <!-- 4 Stat Cards -->
-            <div class="row g-3 mb-4">
+            <div class="row g-3 mb-4" id="statistik">
                 <?php 
                 $cards = [
                     ['title' => 'TOTAL PENGADUAN', 'count' => $total_pengaduan, 'desc' => 'Seluruh pengaduan masuk', 'color' => '#3b82f6', 'icon' => 'fa-file-lines', 'bg' => 'rgba(59,130,246,0.1)'],
@@ -188,28 +188,28 @@ if ($pdo) {
                         <div class="card-body">
                             <div class="row g-2">
                                 <div class="col-6">
-                                    <a href="#" class="text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-white shadow-sm border border-light transition-smooth" onmouseover="this.className='text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-light shadow-md border transition-smooth'">
+                                    <a href="<?= base_url('admin/pengaduan.php'); ?>" class="text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-white shadow-sm border border-light transition-smooth" onmouseover="this.className='text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-light shadow-md border transition-smooth'">
                                         <i class="fa-solid fa-file-signature text-primary fs-3 mb-2"></i>
                                         <div class="fw-bold text-center" style="font-size: 0.75rem;">Buat Pengaduan</div>
                                         <div class="text-muted text-center" style="font-size:0.65rem;">Tambah pengaduan baru</div>
                                     </a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="#" class="text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-white shadow-sm border border-light transition-smooth" onmouseover="this.className='text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-light shadow-md border transition-smooth'">
+                                    <a href="<?= base_url('admin/kategori.php'); ?>" class="text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-white shadow-sm border border-light transition-smooth" onmouseover="this.className='text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-light shadow-md border transition-smooth'">
                                         <i class="fa-solid fa-folder-tree text-warning fs-3 mb-2"></i>
                                         <div class="fw-bold text-center" style="font-size: 0.75rem;">Klasifikasi Pengaduan</div>
                                         <div class="text-muted text-center" style="font-size:0.65rem;">Kelola klasifikasi</div>
                                     </a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="#" class="text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-white shadow-sm border border-light transition-smooth" onmouseover="this.className='text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-light shadow-md border transition-smooth'">
+                                    <a href="<?= base_url('admin/kriteria.php'); ?>" class="text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-white shadow-sm border border-light transition-smooth" onmouseover="this.className='text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-light shadow-md border transition-smooth'">
                                         <i class="fa-solid fa-circle-exclamation text-warning fs-3 mb-2"></i>
                                         <div class="fw-bold text-center" style="font-size: 0.75rem;">Prioritas Penanganan</div>
                                         <div class="text-muted text-center" style="font-size:0.65rem;">Atur prioritas pengaduan</div>
                                     </a>
                                 </div>
                                 <div class="col-6">
-                                    <a href="#" class="text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-white shadow-sm border border-light transition-smooth" onmouseover="this.className='text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-light shadow-md border transition-smooth'">
+                                    <a href="<?= base_url('admin/laporan.php'); ?>" class="text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-white shadow-sm border border-light transition-smooth" onmouseover="this.className='text-decoration-none d-flex flex-column align-items-center justify-content-center p-3 h-100 rounded-3 text-dark bg-light shadow-md border transition-smooth'">
                                         <i class="fa-solid fa-chart-bar text-primary fs-3 mb-2"></i>
                                         <div class="fw-bold text-center" style="font-size: 0.75rem;">Laporan Pengaduan</div>
                                         <div class="text-muted text-center" style="font-size:0.65rem;">Cetak & unduh laporan</div>

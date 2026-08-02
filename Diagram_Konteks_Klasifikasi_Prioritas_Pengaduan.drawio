@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+<mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+	<root>
+		<mxCell id="0"/>
+		<mxCell id="1" parent="0"/>
+		<mxCell id="title" value="Diagram Konteks Sistem Informasi Klasifikasi dan Prioritas Penanganan Pengaduan Masyarakat" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+			<mxGeometry x="184" y="20" width="800" height="30" as="geometry"/>
+		</mxCell>
+		<mxCell id="ext1" value="Masyarakat / Pelapor" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+			<mxGeometry x="40" y="180" width="170" height="70" as="geometry"/>
+		</mxCell>
+		<mxCell id="ext2" value="Admin / Operator" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+			<mxGeometry x="40" y="360" width="170" height="70" as="geometry"/>
+		</mxCell>
+		<mxCell id="ext3" value="Petugas Penanganan" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+			<mxGeometry x="960" y="180" width="170" height="70" as="geometry"/>
+		</mxCell>
+		<mxCell id="ext4" value="Pimpinan / Manajemen" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+			<mxGeometry x="960" y="360" width="170" height="70" as="geometry"/>
+		</mxCell>
+		<mxCell id="proc1" value="Sistem Informasi&#xa;Klasifikasi dan Prioritas&#xa;Penanganan Pengaduan&#xa;Masyarakat" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+			<mxGeometry x="415" y="170" width="340" height="340" as="geometry"/>
+		</mxCell>
+		<mxCell id="e1" value="Data pengaduan, data pelapor, bukti pendukung" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="1" source="ext1" target="proc1">
+			<mxGeometry relative="1" as="geometry">
+				<Array as="points">
+					<mxPoint x="300" y="215"/>
+					<mxPoint x="300" y="260"/>
+				</Array>
+			</mxGeometry>
+		</mxCell>
+		<mxCell id="e2" value="Nomor tiket, status pengaduan, hasil tindak lanjut" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="1" source="proc1" target="ext1">
+			<mxGeometry relative="1" as="geometry">
+				<Array as="points">
+					<mxPoint x="300" y="300"/>
+					<mxPoint x="300" y="215"/>
+				</Array>
+			</mxGeometry>
+		</mxCell>
+		<mxCell id="e3" value="Verifikasi data, validasi pengaduan, kelola kategori" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="1" source="ext2" target="proc1">
+			<mxGeometry relative="1" as="geometry">
+				<Array as="points">
+					<mxPoint x="300" y="395"/>
+					<mxPoint x="300" y="360"/>
+				</Array>
+			</mxGeometry>
+		</mxCell>
+		<mxCell id="e4" value="Data pengaduan masuk, hasil klasifikasi, prioritas" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="1" source="proc1" target="ext2">
+			<mxGeometry relative="1" as="geometry">
+				<Array as="points">
+					<mxPoint x="300" y="440"/>
+					<mxPoint x="300" y="395"/>
+				</Array>
+			</mxGeometry>
+		</mxCell>
+		<mxCell id="e5" value="Daftar pengaduan terklasifikasi dan prioritas penanganan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="1" source="proc1" target="ext3">
+			<mxGeometry relative="1" as="geometry">
+				<Array as="points">
+					<mxPoint x="870" y="260"/>
+					<mxPoint x="870" y="215"/>
+				</Array>
+			</mxGeometry>
+		</mxCell>
+		<mxCell id="e6" value="Update tindak lanjut, hasil penanganan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="1" source="ext3" target="proc1">
+			<mxGeometry relative="1" as="geometry">
+				<Array as="points">
+					<mxPoint x="870" y="215"/>
+					<mxPoint x="870" y="300"/>
+				</Array>
+			</mxGeometry>
+		</mxCell>
+		<mxCell id="e7" value="Permintaan laporan, monitoring kinerja" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="1" source="ext4" target="proc1">
+			<mxGeometry relative="1" as="geometry">
+				<Array as="points">
+					<mxPoint x="870" y="395"/>
+					<mxPoint x="870" y="360"/>
+				</Array>
+			</mxGeometry>
+		</mxCell>
+		<mxCell id="e8" value="Laporan pengaduan, statistik, tingkat prioritas" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;" edge="1" parent="1" source="proc1" target="ext4">
+			<mxGeometry relative="1" as="geometry">
+				<Array as="points">
+					<mxPoint x="870" y="440"/>
+					<mxPoint x="870" y="395"/>
+				</Array>
+			</mxGeometry>
+		</mxCell>
+	</root>
+</mxGraphModel>

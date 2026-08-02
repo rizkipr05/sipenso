@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+<mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+	<root>
+		<mxCell id="0"/>
+		<mxCell id="1" parent="0"/>
+		<mxCell id="A1" value="Pelapor
+(Masyarakat)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+			<mxGeometry x="50" y="150" width="120" height="60" as="geometry"/>
+		</mxCell>
+		<mxCell id="A2" value="Petugas" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+			<mxGeometry x="50" y="350" width="120" height="60" as="geometry"/>
+		</mxCell>
+		<mxCell id="A3" value="Admin" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+			<mxGeometry x="50" y="550" width="120" height="60" as="geometry"/>
+		</mxCell>
+		<mxCell id="P1" value="1.0
+Manajemen
+Akun" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+			<mxGeometry x="350" y="50" width="100" height="100" as="geometry"/>
+		</mxCell>
+		<mxCell id="P2" value="2.0
+Kelola
+Pengaduan" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+			<mxGeometry x="350" y="200" width="100" height="100" as="geometry"/>
+		</mxCell>
+		<mxCell id="P3" value="3.0
+Tindak Lanjut
+&amp; Tanggapan" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+			<mxGeometry x="350" y="350" width="100" height="100" as="geometry"/>
+		</mxCell>
+		<mxCell id="P4" value="4.0
+Kelola Data
+Master" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+			<mxGeometry x="350" y="500" width="100" height="100" as="geometry"/>
+		</mxCell>
+		<mxCell id="P5" value="5.0
+Laporan" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+			<mxGeometry x="350" y="650" width="100" height="100" as="geometry"/>
+		</mxCell>
+		<mxCell id="D1" value="D1 Users" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+			<mxGeometry x="700" y="70" width="120" height="60" as="geometry"/>
+		</mxCell>
+		<mxCell id="D2" value="D2 Pengaduan" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+			<mxGeometry x="700" y="220" width="120" height="60" as="geometry"/>
+		</mxCell>
+		<mxCell id="D4" value="D4 Tanggapan" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+			<mxGeometry x="700" y="370" width="120" height="60" as="geometry"/>
+		</mxCell>
+		<mxCell id="D3" value="D3 Kategori" style="shape=partialRectangle;whiteSpace=wrap;html=1;left=0;right=0;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+			<mxGeometry x="700" y="520" width="120" height="60" as="geometry"/>
+		</mxCell>
+		<mxCell id="E100" value="Data Registrasi/Login" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="A1" target="P1">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E101" value="Data Pengaduan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="A1" target="P2">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E102" value="Simpan Data User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="P1" target="D1">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E103" value="Data Login" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="A2" target="P1">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E104" value="Verifikasi &amp; Tanggapan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="A2" target="P3">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E105" value="Request Laporan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="A2" target="P5">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E106" value="Data Pengaduan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="P2" target="D2">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E107" value="Data Tanggapan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="P3" target="D4">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E108" value="Update Status" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="P3" target="D2">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E109" value="Data Login" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="A3" target="P1">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E110" value="Manajemen Kategori" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="A3" target="P4">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E111" value="Request Laporan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="A3" target="P5">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E112" value="Data Kategori" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="P4" target="D3">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E113" value="Validasi User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="D1" target="P1">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E114" value="Status Pengaduan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="D2" target="P2">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E115" value="Detail Pengaduan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="D2" target="P3">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E116" value="Opsi Kategori" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="D3" target="P2">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E117" value="Data Pengaduan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="D2" target="P5">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="E118" value="Data Tanggapan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="D4" target="P5">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+	</root>
+</mxGraphModel>

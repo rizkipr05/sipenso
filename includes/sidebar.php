@@ -29,20 +29,8 @@ $role = $_SESSION['role'] ?? '';
                 <li class="<?= $current_page == 'kriteria.php' ? 'active' : ''; ?>">
                     <a href="<?= base_url('admin/kriteria.php'); ?>"><i class="fa-solid fa-triangle-exclamation"></i> Prioritas Penanganan</a>
                 </li>
-                <li class="<?= $current_page == 'tindak_lanjut.php' ? 'active' : ''; ?>">
-                    <a href="#"><i class="fa-solid fa-clipboard-check"></i> Tindak Lanjut</a>
-                </li>
-                <li class="<?= $current_page == 'masyarakat.php' ? 'active' : ''; ?>">
-                    <a href="#"><i class="fa-solid fa-users"></i> Data Masyarakat</a>
-                </li>
                 <li class="<?= $current_page == 'laporan.php' ? 'active' : ''; ?>">
                     <a href="<?= base_url('admin/laporan.php'); ?>"><i class="fa-solid fa-file-invoice"></i> Laporan</a>
-                </li>
-                <li class="<?= $current_page == 'statistik.php' ? 'active' : ''; ?>">
-                    <a href="#"><i class="fa-solid fa-chart-line"></i> Grafik &amp; Statistik</a>
-                </li>
-                <li class="<?= $current_page == 'pengaturan.php' ? 'active' : ''; ?>">
-                    <a href="#"><i class="fa-solid fa-gear"></i> Pengaturan</a>
                 </li>
                 <li class="<?= $current_page == 'users.php' ? 'active' : ''; ?>">
                     <a href="<?= base_url('admin/users.php'); ?>"><i class="fa-solid fa-user-shield"></i> User Management</a>
@@ -59,9 +47,14 @@ $role = $_SESSION['role'] ?? '';
                 <li class="<?= $current_page == 'riwayat.php' ? 'active' : ''; ?>">
                     <a href="<?= base_url('pelapor/riwayat.php'); ?>"><i class="fa-solid fa-clock-history"></i> Riwayat Pengaduan</a>
                 </li>
-                <li class="<?= $current_page == 'profil.php' ? 'active' : ''; ?>">
-                    <a href="<?= base_url('profile.php'); ?>"><i class="fa-regular fa-circle-user"></i> Profil Saya</a>
+
+
+            <?php elseif ($role === 'petugas'): ?>
+                <!-- Petugas Specific Menu -->
+                <li class="<?= $current_page == 'dashboard.php' ? 'active' : ''; ?>">
+                    <a href="<?= base_url('petugas/dashboard.php'); ?>"><i class="fa-solid fa-house"></i> Dashboard Petugas</a>
                 </li>
+
             <?php endif; ?>
 
             <li class="mt-2 mb-3">

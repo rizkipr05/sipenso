@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+	<root>
+		<mxCell id="0"/>
+		<mxCell id="1" parent="0"/>
+
+		<!-- Swimlanes -->
+		<mxCell id="pool" value="" style="group" vertex="1" parent="1">
+			<mxGeometry x="100" y="50" width="600" height="700" as="geometry"/>
+		</mxCell>
+
+		<mxCell id="lane1" value="Pelapor" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry width="200" height="700" as="geometry"/>
+		</mxCell>
+
+		<mxCell id="lane2" value="Petugas" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="200" width="200" height="700" as="geometry"/>
+		</mxCell>
+
+		<mxCell id="lane3" value="Admin" style="swimlane;whiteSpace=wrap;html=1;startSize=30;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="400" width="200" height="700" as="geometry"/>
+		</mxCell>
+
+		<!-- Lane 1 Nodes (Pelapor) -->
+		<mxCell id="n1_pelapor" value="Data Profil &amp;&#xa;Login/Registrasi" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="30" y="300" width="140" height="60" as="geometry"/>
+		</mxCell>
+
+		<mxCell id="n2_pelapor" value="Lampiran Bukti&#xa;(Foto/Video)" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="30" y="200" width="140" height="60" as="geometry"/>
+		</mxCell>
+
+		<mxCell id="n3_pelapor" value="Formulir&#xa;Pengaduan" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="30" y="100" width="140" height="60" as="geometry"/>
+		</mxCell>
+
+		<!-- Lane 2 Nodes (Petugas) -->
+		<mxCell id="n1_petugas" value="Verifikasi&#xa;Laporan" style="shape=manualOperation;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="230" y="100" width="140" height="60" as="geometry"/>
+		</mxCell>
+
+		<mxCell id="n2_petugas" value="Proses Tindak&#xa;Lanjut" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="230" y="220" width="140" height="60" as="geometry"/>
+		</mxCell>
+
+		<mxCell id="n3_petugas" value="Laporan &amp;&#xa;Bukti Penyelesaian" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="230" y="340" width="140" height="60" as="geometry"/>
+		</mxCell>
+		
+		<mxCell id="n4_petugas" value="Simpan Arsip /&#xa;Tutup Tiket" style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fixedSize=1;flipV=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="230" y="460" width="140" height="60" as="geometry"/>
+		</mxCell>
+
+		<!-- Lane 3 Nodes (Admin) -->
+		<mxCell id="n1_admin" value="Rekapitulasi&#xa;Pengaduan" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="430" y="100" width="140" height="60" as="geometry"/>
+		</mxCell>
+
+		<mxCell id="n2_admin" value="Pemantauan&#xa;Dashboard" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="430" y="220" width="140" height="60" as="geometry"/>
+		</mxCell>
+
+		<mxCell id="n3_admin" value="Evaluasi &amp;&#xa;Cetak Laporan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontColor=#000000;" vertex="1" parent="pool">
+			<mxGeometry x="430" y="340" width="140" height="60" as="geometry"/>
+		</mxCell>
+
+		<!-- Edges (Lane 1 up) -->
+		<mxCell id="e_l1_up1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="pool" source="n1_pelapor" target="n2_pelapor">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="e_l1_up2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="pool" source="n2_pelapor" target="n3_pelapor">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+
+		<!-- Edges to Lane 2 -->
+		<mxCell id="e_l1_to_l2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="pool" source="n3_pelapor" target="n1_petugas">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+
+		<!-- Edges in Lane 2 down -->
+		<mxCell id="e_l2_d1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="pool" source="n1_petugas" target="n2_petugas">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="e_l2_d2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="pool" source="n2_petugas" target="n3_petugas">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="e_l2_d3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="pool" source="n3_petugas" target="n4_petugas">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+
+		<!-- Edges to Lane 3 -->
+		<mxCell id="e_l2_to_l3_1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="pool" source="n1_petugas" target="n1_admin">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="e_l2_to_l3_2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="pool" source="n2_petugas" target="n2_admin">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+		<mxCell id="e_l2_to_l3_3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;" edge="1" parent="pool" source="n3_petugas" target="n3_admin">
+			<mxGeometry relative="1" as="geometry"/>
+		</mxCell>
+
+	</root>
+</mxGraphModel>
