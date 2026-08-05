@@ -18,10 +18,12 @@ if (isset($_GET['delete']) && (int)$_GET['delete'] > 0) {
 }
 
 // Filters
-$search    = sanitize($_GET['q'] ?? '');
-$status    = sanitize($_GET['status'] ?? '');
+// Keep the original search text for the database query. `sanitize()` encodes
+// HTML characters and is intended only for output, not SQL filter values.
+$search    = trim($_GET['q'] ?? '');
+$status    = trim($_GET['status'] ?? '');
 $kategori  = (int)($_GET['kategori'] ?? 0);
-$prioritas = sanitize($_GET['prioritas'] ?? '');
+$prioritas = trim($_GET['prioritas'] ?? '');
 
 $query = "SELECT p.*, k.nama_kategori, u.nama_lengkap AS nama_pelapor, u.nik 
           FROM pengaduan p 
@@ -31,8 +33,14 @@ $query = "SELECT p.*, k.nama_kategori, u.nama_lengkap AS nama_pelapor, u.nik
 $params = [];
 
 if (!empty($search)) {
-    $query .= " AND (p.nomor_tiket LIKE :search OR p.judul LIKE :search OR u.nama_lengkap LIKE :search)";
-    $params['search'] = '%' . $search . '%';
+    // Native PDO prepared statements cannot reuse one named placeholder.
+    // Use separate placeholders so searching by ticket, title, or reporter
+    // name does not cause SQLSTATE[HY093] and a blank page.
+    $query .= " AND (p.nomor_tiket LIKE :search_ticket OR p.judul LIKE :search_title OR u.nama_lengkap LIKE :search_reporter)";
+    $searchTerm = '%' . $search . '%';
+    $params['search_ticket'] = $searchTerm;
+    $params['search_title'] = $searchTerm;
+    $params['search_reporter'] = $searchTerm;
 }
 if (!empty($status)) {
     $query .= " AND p.status = :status";
@@ -144,7 +152,7 @@ if ($pdo) {
                                             </td>
                                             <td>
                                                 <?php
-                                                $ai = classify_complaint($p['judul'] . ' ' . $p['isi_laporan']);
+                                                $ai = classify_complaint($p['judul'] . ' ' . $p['isi_laporan'], $pdo);
                                                 $match = ($ai['kategori_id'] == $p['kategori_id']);
                                                 ?>
                                                 <?php if ($ai['kode']): ?>

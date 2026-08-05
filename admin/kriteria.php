@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($nama)) {
         if ($pdo) {
+            $bobot = max(1, min(10, $bobot));
             if ($action === 'add') {
                 $stmt = $pdo->prepare("INSERT INTO kriteria_prioritas (nama_kriteria, skor_bobot, deskripsi) VALUES (:nama, :bobot, :desk)");
                 $stmt->execute(['nama' => $nama, 'bobot' => $bobot, 'desk' => $desk]);
@@ -103,9 +104,9 @@ if ($pdo) {
                                             <td><span class="badge bg-primary px-3 py-1 rounded-pill"><?= (int)$kr['skor_bobot']; ?> Poin</span></td>
                                             <td class="small text-muted"><?= sanitize($kr['deskripsi']); ?></td>
                                             <td class="text-center">
-                                                <button class="btn btn-sm btn-outline-primary rounded-pill me-1" 
-                                                        data-bs-toggle="modal" 
-                                                        data-bs-target="#modalEditKriteria<?= $kr['id']; ?>">
+                                                <button class="btn btn-sm btn-outline-primary rounded-pill me-1"
+                                                    data-bs-toggle="modal" data-bs-target="#modalEditKriteria"
+                                                    data-id="<?= (int)$kr['id']; ?>" data-nama="<?= sanitize($kr['nama_kriteria']); ?>" data-bobot="<?= (int)$kr['skor_bobot']; ?>" data-deskripsi="<?= sanitize($kr['deskripsi']); ?>">
                                                     <i class="fa-solid fa-edit me-1"></i> Edit
                                                 </button>
                                                 <a href="<?= base_url('admin/kriteria.php?delete=' . $kr['id']); ?>" class="btn btn-sm btn-outline-danger rounded-pill" onclick="return confirm('Hapus kriteria ini?');">
@@ -114,39 +115,6 @@ if ($pdo) {
                                             </td>
                                         </tr>
 
-                                        <!-- Modal Edit -->
-                                        <div class="modal fade" id="modalEditKriteria<?= $kr['id']; ?>" tabindex="-1">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content border-0 shadow-lg rounded-4">
-                                                    <div class="modal-header bg-primary text-white p-3">
-                                                        <h5 class="modal-title fw-bold"><i class="fa-solid fa-pen-to-square me-2"></i> Edit Kriteria Prioritas</h5>
-                                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                                                    </div>
-                                                    <form action="" method="POST">
-                                                        <input type="hidden" name="action" value="edit">
-                                                        <input type="hidden" name="id" value="<?= $kr['id']; ?>">
-                                                        <div class="modal-body p-4">
-                                                            <div class="mb-3">
-                                                                <label class="form-label font-semibold">Nama Kriteria <span class="text-danger">*</span></label>
-                                                                <input type="text" name="nama_kriteria" class="form-control bg-light" value="<?= sanitize($kr['nama_kriteria']); ?>" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label font-semibold">Skor Bobot Poin <span class="text-danger">*</span></label>
-                                                                <input type="number" name="skor_bobot" min="1" max="10" class="form-control bg-light" value="<?= (int)$kr['skor_bobot']; ?>" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label font-semibold">Deskripsi</label>
-                                                                <textarea name="deskripsi" rows="3" class="form-control bg-light"><?= sanitize($kr['deskripsi']); ?></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer bg-light p-3">
-                                                            <button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-primary rounded-pill px-4 fw-bold">Simpan Perubahan</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </tbody>
@@ -158,6 +126,10 @@ if ($pdo) {
         </div>
     </div>
 </div>
+
+<!-- Modal Edit Kriteria -->
+<div class="modal fade" id="modalEditKriteria" tabindex="-1"><div class="modal-dialog"><div class="modal-content border-0 shadow-lg rounded-4"><div class="modal-header bg-primary text-white p-3"><h5 class="modal-title fw-bold"><i class="fa-solid fa-pen-to-square me-2"></i>Edit Kriteria Prioritas</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><form method="POST"><input type="hidden" name="action" value="edit"><input type="hidden" name="id" id="editKriteriaId"><div class="modal-body p-4"><div class="mb-3"><label class="form-label">Nama Kriteria <span class="text-danger">*</span></label><input type="text" name="nama_kriteria" id="editKriteriaNama" class="form-control bg-light" required></div><div class="mb-3"><label class="form-label">Skor Bobot Poin <span class="text-danger">*</span></label><input type="number" name="skor_bobot" id="editKriteriaBobot" min="1" max="10" class="form-control bg-light" required></div><div class="mb-3"><label class="form-label">Deskripsi</label><textarea name="deskripsi" id="editKriteriaDeskripsi" rows="3" class="form-control bg-light"></textarea></div></div><div class="modal-footer bg-light p-3"><button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Batal</button><button type="submit" class="btn btn-primary rounded-pill px-4 fw-bold">Simpan Perubahan</button></div></form></div></div></div>
+<script>document.getElementById('modalEditKriteria').addEventListener('show.bs.modal', function (event) { const button = event.relatedTarget; this.querySelector('#editKriteriaId').value = button.dataset.id; this.querySelector('#editKriteriaNama').value = button.dataset.nama; this.querySelector('#editKriteriaBobot').value = button.dataset.bobot; this.querySelector('#editKriteriaDeskripsi').value = button.dataset.deskripsi; });</script>
 
 <!-- Modal Tambah Kriteria -->
 <div class="modal fade" id="modalTambahKriteria" tabindex="-1">

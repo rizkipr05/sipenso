@@ -18,14 +18,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Kode Kategori dan Nama Kategori wajib diisi.';
     } else {
         if ($pdo) {
-            if ($action === 'add') {
-                $stmt = $pdo->prepare("INSERT INTO kategori (kode_kategori, nama_kategori, deskripsi) VALUES (:kode, :nama, :desk)");
-                $stmt->execute(['kode' => $kode, 'nama' => $nama, 'desk' => $desk]);
-                set_flash('success', 'Kategori baru berhasil ditambahkan.');
-            } elseif ($action === 'edit' && $id > 0) {
-                $stmt = $pdo->prepare("UPDATE kategori SET kode_kategori = :kode, nama_kategori = :nama, deskripsi = :desk WHERE id = :id");
-                $stmt->execute(['kode' => $kode, 'nama' => $nama, 'desk' => $desk, 'id' => $id]);
-                set_flash('success', 'Kategori berhasil diperbarui.');
+            try {
+                if ($action === 'add') {
+                    $stmt = $pdo->prepare("INSERT INTO kategori (kode_kategori, nama_kategori, deskripsi) VALUES (:kode, :nama, :desk)");
+                    $stmt->execute(['kode' => $kode, 'nama' => $nama, 'desk' => $desk]);
+                    set_flash('success', 'Kategori baru berhasil ditambahkan.');
+                } elseif ($action === 'edit' && $id > 0) {
+                    $stmt = $pdo->prepare("UPDATE kategori SET kode_kategori = :kode, nama_kategori = :nama, deskripsi = :desk WHERE id = :id");
+                    $stmt->execute(['kode' => $kode, 'nama' => $nama, 'desk' => $desk, 'id' => $id]);
+                    set_flash('success', 'Kategori berhasil diperbarui.');
+                }
+            } catch (\PDOException $e) {
+                set_flash('danger', 'Kode kategori sudah digunakan atau data kategori tidak dapat disimpan.');
             }
             header('Location: ' . base_url('admin/kategori.php'));
             exit;
@@ -103,9 +107,9 @@ if ($pdo) {
                                             <td class="small text-muted"><?= sanitize($kat['deskripsi']); ?></td>
                                             <td><span class="badge bg-info text-dark px-3 py-1 rounded-pill"><?= (int)$kat['total_pengaduan']; ?> Laporan</span></td>
                                             <td class="text-center">
-                                                <button class="btn btn-sm btn-outline-primary rounded-pill me-1" 
-                                                        data-bs-toggle="modal" 
-                                                        data-bs-target="#modalEditKategori<?= $kat['id']; ?>">
+                                                <button class="btn btn-sm btn-outline-primary rounded-pill me-1"
+                                                    data-bs-toggle="modal" data-bs-target="#modalEditKategori"
+                                                    data-id="<?= (int)$kat['id']; ?>" data-kode="<?= sanitize($kat['kode_kategori']); ?>" data-nama="<?= sanitize($kat['nama_kategori']); ?>" data-deskripsi="<?= sanitize($kat['deskripsi']); ?>">
                                                     <i class="fa-solid fa-edit me-1"></i> Edit
                                                 </button>
                                                 <a href="<?= base_url('admin/kategori.php?delete=' . $kat['id']); ?>" class="btn btn-sm btn-outline-danger rounded-pill" onclick="return confirm('Hapus kategori ini?');">
@@ -114,39 +118,6 @@ if ($pdo) {
                                             </td>
                                         </tr>
 
-                                        <!-- Modal Edit -->
-                                        <div class="modal fade" id="modalEditKategori<?= $kat['id']; ?>" tabindex="-1">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content border-0 shadow-lg rounded-4">
-                                                    <div class="modal-header bg-primary text-white p-3">
-                                                        <h5 class="modal-title fw-bold"><i class="fa-solid fa-pen-to-square me-2"></i> Edit Kategori</h5>
-                                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                                                    </div>
-                                                    <form action="" method="POST">
-                                                        <input type="hidden" name="action" value="edit">
-                                                        <input type="hidden" name="id" value="<?= $kat['id']; ?>">
-                                                        <div class="modal-body p-4">
-                                                            <div class="mb-3">
-                                                                <label class="form-label font-semibold">Kode Kategori <span class="text-danger">*</span></label>
-                                                                <input type="text" name="kode_kategori" class="form-control bg-light" value="<?= sanitize($kat['kode_kategori']); ?>" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label font-semibold">Nama Kategori <span class="text-danger">*</span></label>
-                                                                <input type="text" name="nama_kategori" class="form-control bg-light" value="<?= sanitize($kat['nama_kategori']); ?>" required>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label font-semibold">Deskripsi</label>
-                                                                <textarea name="deskripsi" rows="3" class="form-control bg-light"><?= sanitize($kat['deskripsi']); ?></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer bg-light p-3">
-                                                            <button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Batal</button>
-                                                            <button type="submit" class="btn btn-primary rounded-pill px-4 fw-bold">Simpan Perubahan</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </tbody>
@@ -158,6 +129,10 @@ if ($pdo) {
         </div>
     </div>
 </div>
+
+<!-- Modal Edit Kategori -->
+<div class="modal fade" id="modalEditKategori" tabindex="-1"><div class="modal-dialog"><div class="modal-content border-0 shadow-lg rounded-4"><div class="modal-header bg-primary text-white p-3"><h5 class="modal-title fw-bold"><i class="fa-solid fa-pen-to-square me-2"></i>Edit Kategori</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><form method="POST"><input type="hidden" name="action" value="edit"><input type="hidden" name="id" id="editKategoriId"><div class="modal-body p-4"><div class="mb-3"><label class="form-label">Kode Kategori <span class="text-danger">*</span></label><input type="text" name="kode_kategori" id="editKategoriKode" class="form-control bg-light" required></div><div class="mb-3"><label class="form-label">Nama Kategori <span class="text-danger">*</span></label><input type="text" name="nama_kategori" id="editKategoriNama" class="form-control bg-light" required></div><div class="mb-3"><label class="form-label">Deskripsi</label><textarea name="deskripsi" id="editKategoriDeskripsi" rows="3" class="form-control bg-light"></textarea></div></div><div class="modal-footer bg-light p-3"><button type="button" class="btn btn-secondary rounded-pill px-3" data-bs-dismiss="modal">Batal</button><button type="submit" class="btn btn-primary rounded-pill px-4 fw-bold">Simpan Perubahan</button></div></form></div></div></div>
+<script>document.getElementById('modalEditKategori').addEventListener('show.bs.modal', function (event) { const button = event.relatedTarget; this.querySelector('#editKategoriId').value = button.dataset.id; this.querySelector('#editKategoriKode').value = button.dataset.kode; this.querySelector('#editKategoriNama').value = button.dataset.nama; this.querySelector('#editKategoriDeskripsi').value = button.dataset.deskripsi; });</script>
 
 <!-- Modal Tambah Kategori -->
 <div class="modal fade" id="modalTambahKategori" tabindex="-1">

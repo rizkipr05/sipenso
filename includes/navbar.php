@@ -13,6 +13,19 @@ if (is_logged_in() && empty($foto_profil) && isset($pdo)) {
 $avatar_url = (!empty($foto_profil) && file_exists(__DIR__ . '/../assets/uploads/avatars/' . $foto_profil))
     ? base_url('assets/uploads/avatars/' . $foto_profil)
     : null;
+
+$search_target = $role === 'admin' ? 'admin/pengaduan.php' : ($role === 'petugas' ? 'petugas/dashboard.php' : 'pelapor/riwayat.php');
+$notifications = [];
+if (is_logged_in() && isset($pdo) && $pdo) {
+    if ($role === 'pelapor') {
+        $stmtNotifications = $pdo->prepare("SELECT nomor_tiket, status, updated_at FROM pengaduan WHERE user_id = :uid ORDER BY updated_at DESC LIMIT 5");
+        $stmtNotifications->execute(['uid' => $_SESSION['user_id']]);
+        $notifications = $stmtNotifications->fetchAll();
+    } elseif ($role === 'admin' || $role === 'petugas') {
+        $stmtNotifications = $pdo->query("SELECT nomor_tiket, status, updated_at FROM pengaduan ORDER BY updated_at DESC LIMIT 5");
+        $notifications = $stmtNotifications->fetchAll();
+    }
+}
 ?>
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top">
     <div class="container-fluid px-lg-4 d-flex align-items-center">
@@ -33,20 +46,35 @@ $avatar_url = (!empty($foto_profil) && file_exists(__DIR__ . '/../assets/uploads
         <div class="d-flex align-items-center ms-auto gap-3">
             
             <!-- Search Bar -->
-            <div class="input-group d-none d-lg-flex" style="width: 250px;">
-                <input type="text" class="form-control" placeholder="Cari pengaduan, NIK, nama..." aria-label="Search" style="border-radius: 20px 0 0 20px; border-right: none; font-size: 0.85rem; padding: 10px 15px;">
-                <span class="input-group-text bg-white" style="border-radius: 0 20px 20px 0; border-left: none; cursor: pointer;">
+            <form action="<?= base_url($search_target); ?>" method="GET" class="input-group d-none d-lg-flex" style="width: 250px;">
+                <input type="search" name="q" class="form-control" placeholder="Cari pengaduan, NIK, nama..." aria-label="Cari pengaduan" style="border-radius: 20px 0 0 20px; border-right: none; font-size: 0.85rem; padding: 10px 15px;">
+                <button type="submit" class="input-group-text bg-white" aria-label="Mulai pencarian" style="border-radius: 0 20px 20px 0; border-left: none; cursor: pointer;">
                     <i class="fa-solid fa-search text-muted"></i>
-                </span>
-            </div>
+                </button>
+            </form>
             
             <!-- Notification Bell -->
-            <a href="#" class="position-relative text-muted ms-1 me-2 d-none d-sm-block">
-                <i class="fa-solid fa-bell fs-5"></i>
-                <span class="position-absolute pt-1 start-100 translate-middle p-1 bg-danger border border-white rounded-circle" style="top: 2px;">
-                    <span class="visually-hidden">New alerts</span>
-                </span>
-            </a>
+            <div class="dropdown d-none d-sm-block">
+                <button class="btn position-relative text-muted ms-1 me-2 p-0 border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Buka notifikasi">
+                    <i class="fa-solid fa-bell fs-5"></i>
+                    <?php if (!empty($notifications)): ?>
+                        <span class="position-absolute pt-1 start-100 translate-middle p-1 bg-danger border border-white rounded-circle" style="top: 2px;"><span class="visually-hidden">Notifikasi baru</span></span>
+                    <?php endif; ?>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 p-0" style="width: 320px;">
+                    <div class="px-3 py-2 border-bottom fw-bold">Notifikasi Pengaduan</div>
+                    <?php if (!empty($notifications)): ?>
+                        <?php foreach ($notifications as $notification): ?>
+                            <a class="dropdown-item py-2 px-3" href="<?= base_url($search_target . '?q=' . urlencode($notification['nomor_tiket'])); ?>">
+                                <span class="d-block fw-semibold small"><?= sanitize($notification['nomor_tiket']); ?></span>
+                                <span class="d-block text-muted" style="font-size:.75rem;"><?= sanitize($notification['status']); ?> · <?= format_tanggal($notification['updated_at'], false); ?></span>
+                            </a>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-muted small text-center py-3 mb-0">Belum ada notifikasi.</p>
+                    <?php endif; ?>
+                </div>
+            </div>
 
             <!-- User Dropdown -->
             <?php if (is_logged_in()): ?>

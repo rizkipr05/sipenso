@@ -59,6 +59,33 @@ if (isset($_GET['toggle_status']) && (int)$_GET['toggle_status'] > 0) {
     }
 }
 
+// Handle Account Deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action_delete_user'])) {
+    $uid = (int)($_POST['user_id'] ?? 0);
+
+    if ($uid <= 0) {
+        set_flash('danger', 'ID akun tidak valid.');
+    } elseif ($uid === (int)$_SESSION['user_id']) {
+        set_flash('danger', 'Akun administrator yang sedang digunakan tidak dapat dihapus.');
+    } elseif ($pdo) {
+        // Administrator accounts are protected from deletion.
+        // Related complaints, responses, and activity logs follow the
+        // database foreign-key rules when a user is removed.
+        $stmt = $pdo->prepare("DELETE FROM users WHERE id = :uid AND role != 'admin'");
+        $stmt->execute(['uid' => $uid]);
+
+        if ($stmt->rowCount() > 0) {
+            log_activity($_SESSION['user_id'], 'Delete User', 'Menghapus akun user ID ' . $uid, $pdo);
+            set_flash('success', 'Akun pengguna berhasil dihapus.');
+        } else {
+            set_flash('danger', 'Akun tidak ditemukan atau merupakan akun administrator.');
+        }
+    }
+
+    header('Location: ' . base_url('admin/users.php'));
+    exit;
+}
+
 if (isset($_GET['reset_pwd']) && (int)$_GET['reset_pwd'] > 0) {
     $uid = (int)$_GET['reset_pwd'];
     if ($pdo) {
@@ -171,6 +198,12 @@ if ($pdo) {
                                                     <a href="<?= base_url('admin/users.php?reset_pwd=' . $u['id']); ?>" class="btn btn-sm btn-outline-secondary rounded-pill" onclick="return confirm('Reset password akun ini menjadi password123?');">
                                                         <i class="fa-solid fa-key me-1"></i> Reset Password
                                                     </a>
+                                                    <form action="<?= base_url('admin/users.php'); ?>" method="POST" class="d-inline">
+                                                        <input type="hidden" name="user_id" value="<?= (int)$u['id']; ?>">
+                                                        <button type="submit" name="action_delete_user" class="btn btn-sm btn-outline-danger rounded-pill ms-1" onclick="return confirm('Hapus akun <?= htmlspecialchars($u['nama_lengkap'], ENT_QUOTES, 'UTF-8'); ?>? Data pengaduan dan riwayat terkait dapat ikut terhapus secara permanen.');">
+                                                            <i class="fa-solid fa-trash me-1"></i> Hapus
+                                                        </button>
+                                                    </form>
                                                 <?php else: ?>
                                                     <span class="text-muted small">Utama</span>
                                                 <?php endif; ?>
